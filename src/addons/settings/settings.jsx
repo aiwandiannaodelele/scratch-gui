@@ -32,6 +32,9 @@ import brushImage from './icons/brush.svg';
 import undoImage from './icons/undo.svg';
 import expandImageBlack from './icons/expand.svg';
 import infoImage from './icons/info.svg';
+import resetImage from './icons/reset.svg';
+import exportImage from './icons/export.svg';
+import importImage from './icons/import.svg';
 import TWFancyCheckbox from '../../components/tw-fancy-checkbox/checkbox.jsx';
 import styles from './settings.css';
 import {detectTheme} from '../../lib/themes/themePersistance.js';
@@ -59,6 +62,7 @@ if (locale !== 'en') {
     }
 }
 
+document.documentElement.lang = locale;
 document.title = `${settingsTranslations.title} - ${APP_NAME}`;
 const theme = detectTheme();
 applyGuiColors(theme);
@@ -557,23 +561,14 @@ const Addon = ({
     manifest,
     extended
 }) => (
-    <div className={classNames(styles.addon, {[styles.addonDirty]: settings.dirty})}>
+    <div
+        className={classNames(styles.addon, {
+            [styles.addonDirty]: settings.dirty,
+            [styles.addonOpen]: settings.enabled
+        })}
+    >
         <div className={styles.addonHeader}>
-            <label className={styles.addonTitle}>
-                <div className={styles.addonSwitch}>
-                    <Switch
-                        value={settings.enabled}
-                        onChange={value => {
-                            if (
-                                !value ||
-                                !manifest.tags.includes('danger') ||
-                                confirm(settingsTranslations.enableDangerous)
-                            ) {
-                                SettingsStore.setAddonEnabled(id, value);
-                            }
-                        }}
-                    />
-                </div>
+            <div className={styles.addonIcon}>
                 {manifest.tags.includes('theme') ? (
                     <img
                         className={styles.extensionImage}
@@ -589,21 +584,37 @@ const Addon = ({
                         alt=""
                     />
                 )}
-                <div className={styles.addonTitleText}>
-                    {addonTranslations[`${id}/@name`] || manifest.name}
+            </div>
+            <div className={styles.addonBody}>
+                <div className={styles.addonTitleRow}>
+                    <span className={styles.addonTitleText}>
+                        {addonTranslations[`${id}/@name`] || manifest.name}
+                    </span>
+                    {extended && (
+                        <span className={styles.addonId}>
+                            {`(${id})`}
+                        </span>
+                    )}
+                    <Tags manifest={manifest} />
                 </div>
-                {extended && (
-                    <div className={styles.addonId}>
-                        {`(${id})`}
-                    </div>
-                )}
-            </label>
-            <Tags manifest={manifest} />
-            {!settings.enabled && (
-                <div className={styles.inlineDescription}>
+                <div className={styles.addonDescription}>
                     {addonTranslations[`${id}/@description`] || manifest.description}
                 </div>
-            )}
+            </div>
+            <div className={styles.addonSwitch}>
+                <Switch
+                    value={settings.enabled}
+                    onChange={value => {
+                        if (
+                            !value ||
+                            !manifest.tags.includes('danger') ||
+                            confirm(settingsTranslations.enableDangerous)
+                        ) {
+                            SettingsStore.setAddonEnabled(id, value);
+                        }
+                    }}
+                />
+            </div>
             <div className={styles.addonOperations}>
                 {settings.enabled && manifest.settings && (
                     <button
@@ -741,15 +752,17 @@ UnsupportedAddons.propTypes = {
 };
 
 const InternalAddonList = ({addons, extended}) => (
-    addons.map(({id, manifest, state}) => (
-        <Addon
-            key={id}
-            id={id}
-            settings={state}
-            manifest={manifest}
-            extended={extended}
-        />
-    ))
+    <div className={styles.addonGrid}>
+        {addons.map(({id, manifest, state}) => (
+            <Addon
+                key={id}
+                id={id}
+                settings={state}
+                manifest={manifest}
+                extended={extended}
+            />
+        ))}
+    </div>
 );
 
 class AddonGroup extends React.Component {
@@ -1133,18 +1146,36 @@ class AddonSettingsComponent extends React.Component {
                                     className={classNames(styles.button, styles.resetAllButton)}
                                     onClick={this.handleResetAll}
                                 >
+                                    <img
+                                        className={styles.footerButtonIcon}
+                                        src={resetImage}
+                                        alt=""
+                                        draggable={false}
+                                    />
                                     {settingsTranslations.resetAll}
                                 </button>
                                 <button
                                     className={classNames(styles.button, styles.exportButton)}
                                     onClick={this.handleExport}
                                 >
+                                    <img
+                                        className={styles.footerButtonIcon}
+                                        src={exportImage}
+                                        alt=""
+                                        draggable={false}
+                                    />
                                     {settingsTranslations.export}
                                 </button>
                                 <button
                                     className={classNames(styles.button, styles.importButton)}
                                     onClick={this.handleImport}
                                 >
+                                    <img
+                                        className={styles.footerButtonIcon}
+                                        src={importImage}
+                                        alt=""
+                                        draggable={false}
+                                    />
                                     {settingsTranslations.import}
                                 </button>
                             </div>

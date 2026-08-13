@@ -256,8 +256,9 @@ class LibraryComponent extends React.Component {
         const filteredData = this.state.canDisplay && this.props.data && this.getFilteredData();
         return (
             <Modal
-                fullScreen
+                fullScreen={this.props.fullScreen}
                 contentLabel={this.props.title}
+                className={this.props.modalClassName}
                 id={this.props.id}
                 onRequestClose={this.handleClose}
             >
@@ -385,7 +386,9 @@ LibraryComponent.propTypes = {
         PropTypes.instanceOf(Promise)
     ]),
     filterable: PropTypes.bool,
+    fullScreen: PropTypes.bool,
     id: PropTypes.string.isRequired,
+    modalClassName: PropTypes.string,
     persistableKey: PropTypes.string,
     intl: intlShape.isRequired,
     onItemMouseEnter: PropTypes.func,
@@ -401,6 +404,7 @@ LibraryComponent.propTypes = {
 
 LibraryComponent.defaultProps = {
     filterable: true,
+    fullScreen: true,
     persistableKey: 'name',
     showPlayButton: false
 };

@@ -13,6 +13,7 @@
     "editor-devtools/unused-var": "{count, plural, other {要刪除 # 個沒有用到的變數嗎？這些變數包含：\n} }",
     "editor-devtools/var-not-exist": "這個變數不存在…",
     "editor-devtools/variables": "變數",
+    "find-bar/find-title": "查找",
     "find-bar/find-placeholder": "查找 (Ctrl+F)",
     "middle-click-popup/start-typing": "開始打字...",
     "editor-searchable-dropdowns/createBroadcast": "建立廣播訊息 {name}",

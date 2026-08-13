@@ -8,11 +8,13 @@
     flex-grow: 1;
 
     background: $ui-white;
-    border-radius: 10rem;
+    border: 1px solid $ui-black-transparent;
+    border-radius: 0.5rem;
     user-select: none;
     height: $library-filter-bar-height;
 
     position: relative;
+    transition: border-color 0.15s ease-out, box-shadow 0.15s ease-out;
 }
 
 .filter-icon {
@@ -34,8 +36,13 @@
     transform: scaleX(-1);
 }
 
+.filter:hover {
+    border-color: $text-primary-transparent;
+}
+
 .filter:focus-within {
-    box-shadow: 0 0 0 .25rem $looks-transparent;
+    border-color: $looks-secondary;
+    box-shadow: 0 0 0 0.125rem $looks-transparent;
 }
 
 /*

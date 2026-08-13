@@ -2,7 +2,7 @@
 @import "../../css/units.css";
 
 .author-info {
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
     display: flex;
     justify-content: flex-start;
     align-items: center;

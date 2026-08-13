@@ -3,6 +3,7 @@ import log from './log';
 import LazyScratchBlocks from './tw-lazy-scratch-blocks';
 import LoadingSpinner from '../components/tw-loading-spinner/spinner.jsx';
 import CrashMessage from '../components/crash-message/crash-message.jsx';
+import installContextMenuEnhancer from './tw-context-menu-enhancer';
 
 const LoadScratchBlocksHOC = function (WrappedComponent) {
     class LoadScratchBlocks extends React.Component {
@@ -15,6 +16,7 @@ const LoadScratchBlocksHOC = function (WrappedComponent) {
             if (!this.state.loaded) {
                 LazyScratchBlocks.load()
                     .then(() => {
+                        installContextMenuEnhancer();
                         this.setState({
                             loaded: true
                         });

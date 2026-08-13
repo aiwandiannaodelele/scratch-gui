@@ -17,6 +17,7 @@
     "editor-devtools/var-not-exist": "Esa variable no existe..",
     "find-bar/complex-broadcast": "(expresión)",
     "find-bar/event": "evento {name}",
+    "find-bar/find-title": "Buscar",
     "find-bar/find-placeholder": "Buscar (Ctrl+F)",
     "find-bar/list-global": "LISTA {name}",
     "find-bar/list-local": "lista {name}",

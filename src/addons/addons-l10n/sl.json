@@ -18,6 +18,7 @@
     "editor-devtools/variables": "spremenljivke",
     "find-bar/complex-broadcast": "(izraz)",
     "find-bar/event": "dogodek {name}",
+    "find-bar/find-title": "Iskanje",
     "find-bar/find-placeholder": "Iskanje (Ctrl+F)",
     "find-bar/list-global": "SEZNAM {name}",
     "find-bar/list-local": "seznam {name}",

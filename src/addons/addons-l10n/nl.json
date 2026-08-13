@@ -18,6 +18,7 @@
     "editor-devtools/variables": "variabelen",
     "find-bar/complex-broadcast": "(expressie)",
     "find-bar/event": "evenement {name}",
+    "find-bar/find-title": "Zoeken",
     "find-bar/find-placeholder": "Zoeken (Ctrl+F)",
     "find-bar/list-global": "LIJST {name}",
     "find-bar/list-local": "lijst {name}",

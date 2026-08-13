@@ -3,7 +3,7 @@
 
 .inline-message {
     color: $menu-bar-foreground;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
     display: flex;
     justify-content: flex-end;
     align-items: center;

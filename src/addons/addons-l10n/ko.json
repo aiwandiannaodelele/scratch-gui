@@ -15,6 +15,7 @@
     "editor-devtools/variables": "변수",
     "find-bar/complex-broadcast": "(식)",
     "find-bar/event": "이벤트 {name}",
+    "find-bar/find-title": "찾기",
     "find-bar/find-placeholder": "찾기 (Ctrl+F)",
     "find-bar/list-global": "리스트 {name}",
     "find-bar/list-local": "리스트 {name}",

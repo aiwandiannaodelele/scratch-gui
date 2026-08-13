@@ -12,7 +12,7 @@ import extensionLibraryContent, {
 } from '../lib/libraries/extensions/index.jsx';
 import extensionTags from '../lib/libraries/tw-extension-tags';
 
-import LibraryComponent from '../components/library/library.jsx';
+import ExtensionLibraryWindow from '../components/tw-extension-library/extension-library.jsx';
 import extensionIcon from '../components/action-menu/icon--sprite.svg';
 
 const messages = defineMessages({
@@ -160,7 +160,6 @@ class ExtensionLibrary extends React.PureComponent {
         let library = null;
         if (this.state.gallery || this.state.galleryError || this.state.galleryTimedOut) {
             library = extensionLibraryContent.map(toLibraryItem);
-            library.push('---');
             if (this.state.gallery) {
                 library.push(toLibraryItem(galleryMore));
                 const locale = this.props.intl.locale;
@@ -178,14 +177,10 @@ class ExtensionLibrary extends React.PureComponent {
         }
 
         return (
-            <LibraryComponent
-                data={library}
-                filterable
-                persistableKey="extensionId"
-                id="extensionLibrary"
-                tags={extensionTags}
+            <ExtensionLibraryWindow
+                data={library || []}
+                tags={extensionTags.map(tag => ({tag: tag.tag, name: tag.intlLabel}))}
                 title={this.props.intl.formatMessage(messages.extensionTitle)}
-                visible={this.props.visible}
                 onItemSelected={this.handleItemSelect}
                 onRequestClose={this.props.onRequestClose}
             />

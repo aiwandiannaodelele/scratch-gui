@@ -4,9 +4,14 @@
 .tag-button {
     padding: .625rem 1rem;
     background: $looks-secondary;
-    border-radius: 1.375rem;
+    border-radius: 0.5rem;
     color: white;
     height: $library-filter-bar-height;
+    transition: filter 0.15s ease-out, opacity 0.15s ease-out;
+}
+
+.tag-button:hover {
+    filter: brightness(0.95);
 }
 
 .tag-button-icon {

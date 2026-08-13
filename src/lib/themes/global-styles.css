@@ -16,11 +16,97 @@
     color: $text-primary !important;
     background: $popover-background !important;
     border: 1px solid $ui-black-transparent !important;
-    box-shadow: 0px 0px 8px 1px $shadow !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px $shadow !important;
+    border-radius: 0.5rem !important;
 }
 :global(.Popover-tipShape) {
     fill: $popover-background !important;
     stroke: $ui-black-transparent !important;
+}
+
+/* ScratchBlocks right-click context menu - modern look */
+:global(.blocklyWidgetDiv .blocklyContextMenu) {
+    border-radius: 0.5rem !important;
+    background: #ffffff !important;
+    border: 1px solid rgba(0, 0, 0, 0.06) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+    padding: 6px !important;
+    overflow: hidden;
+    animation: tw-context-open 0.12s ease-out;
+    transform-origin: top left;
+}
+
+@keyframes tw-context-open {
+    from {
+        opacity: 0;
+        transform: scale(0.97);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem),
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menu-nocheckbox .goog-menuitem),
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menu-noicon .goog-menuitem) {
+    position: relative;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 500 !important;
+    color: #18181b !important;
+    padding: 7px 12px 7px 34px !important;
+    border-radius: 0.375rem !important;
+    margin: 1px 0;
+    transition: background-color 0.1s ease-out, color 0.1s ease-out, padding 0.1s ease-out;
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem:hover),
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem-highlight),
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem-hover) {
+    background-color: #f4f4f5 !important;
+    border-color: #f4f4f5 !important;
+    border-style: solid !important;
+    border-width: 1px !important;
+    border-radius: 0.375rem !important;
+    padding: 6px 12px 6px 34px !important;
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem-disabled) {
+    color: #a1a1aa !important;
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .tw-context-icon) {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem-rtl .tw-context-icon) {
+    left: auto;
+    right: 10px;
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .tw-context-icon svg) {
+    transition: transform 0.12s ease-out;
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem:hover .tw-context-icon svg),
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem-highlight .tw-context-icon svg) {
+    transform: scale(1.1);
+}
+
+:global(.blocklyWidgetDiv .blocklyContextMenu .goog-menuitem-accel) {
+    font-weight: 400 !important;
+    color: #a1a1aa !important;
 }
 
 /* ScratchAdddons editor-dark-mode compatibility */

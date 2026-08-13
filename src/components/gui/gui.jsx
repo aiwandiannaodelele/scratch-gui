@@ -54,7 +54,7 @@ const messages = defineMessages({
     addExtension: {
         id: 'gui.gui.addExtension',
         description: 'Button to add an extension in the target pane',
-        defaultMessage: 'Add Extension'
+        defaultMessage: '扩展'
     }
 });
 
@@ -384,6 +384,17 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
+                                    <button
+                                        className={styles.sidebarButton}
+                                        title={intl.formatMessage(messages.addExtension)}
+                                        onClick={onExtensionButtonClick}
+                                    >
+                                        <img
+                                            draggable={false}
+                                            src={addExtensionIcon}
+                                        />
+                                        <span>{intl.formatMessage(messages.addExtension)}</span>
+                                    </button>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>
@@ -400,19 +411,6 @@ const GUIComponent = props => {
                                             theme={theme}
                                             vm={vm}
                                         />
-                                    </Box>
-                                    <Box className={styles.extensionButtonContainer}>
-                                        <button
-                                            className={styles.extensionButton}
-                                            title={intl.formatMessage(messages.addExtension)}
-                                            onClick={onExtensionButtonClick}
-                                        >
-                                            <img
-                                                className={styles.extensionButtonIcon}
-                                                draggable={false}
-                                                src={addExtensionIcon}
-                                            />
-                                        </button>
                                     </Box>
                                     <Box className={styles.watermark}>
                                         <Watermark />

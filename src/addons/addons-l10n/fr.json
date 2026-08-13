@@ -16,6 +16,7 @@
     "editor-devtools/unused-var": "{count, plural, one {Outils développeur : Supprimer 1 variable locale inutilisée ? Là voilà :\n} many {Outils développeur : Supprimer les # variables locales inutilisées ? Les voici :\n} other {Outils développeur : Supprimer les # variables locales inutilisées ? Les voici :\n} }",
     "editor-devtools/var-not-exist": "Cette variable n'existe pas...",
     "find-bar/event": "événement{name}",
+    "find-bar/find-title": "Rechercher",
     "find-bar/find-placeholder": "Rechercher (Ctrl + F)",
     "find-bar/list-global": "LISTE{name}",
     "find-bar/list-local": "liste{name}",

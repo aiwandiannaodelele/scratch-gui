@@ -18,6 +18,7 @@
     "editor-devtools/variables": "Variablen",
     "find-bar/complex-broadcast": "(Parameter)",
     "find-bar/event": "Ereignis {name}",
+    "find-bar/find-title": "Finden",
     "find-bar/find-placeholder": "Finden (Strg+F)",
     "find-bar/list-global": "LISTE {name}",
     "find-bar/list-local": "Liste {name}",

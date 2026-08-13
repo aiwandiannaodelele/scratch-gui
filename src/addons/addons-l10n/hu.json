@@ -15,6 +15,7 @@
     "editor-devtools/variables": "változók",
     "find-bar/complex-broadcast": "(kifejezés)",
     "find-bar/event": "{name} esemény",
+    "find-bar/find-title": "Keresés",
     "find-bar/find-placeholder": "Keresés (Ctrl+F)",
     "find-bar/list-global": "{name} LISTA",
     "find-bar/list-local": "{name} lista",

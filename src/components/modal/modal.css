@@ -25,7 +25,7 @@
     border-radius: $space;
     user-select: none;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
     overflow: hidden;
 }
 
@@ -69,10 +69,11 @@ $sides: 20rem;
     width: 100%;
     background-color: $ui-modal-header-background;
     color: $ui-modal-header-foreground;
+    border-bottom: 1px solid $ui-black-transparent;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
     font-size: 1rem;
-    font-weight: normal;
+    font-weight: 500;
 }
 
 .header-item {

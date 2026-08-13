@@ -18,6 +18,7 @@
     "editor-devtools/variables": "変数",
     "find-bar/complex-broadcast": "(式)",
     "find-bar/event": "イベント {name}",
+    "find-bar/find-title": "検索",
     "find-bar/find-placeholder": "検索 (Ctrl+F)",
     "find-bar/list-global": "リスト {name}",
     "find-bar/list-local": "スプライトリスト {name}",

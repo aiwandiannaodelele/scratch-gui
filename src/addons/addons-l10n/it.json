@@ -18,6 +18,7 @@
     "editor-devtools/variables": "variabili",
     "find-bar/complex-broadcast": "(espressione)",
     "find-bar/event": "situazione {name}",
+    "find-bar/find-title": "Cerca",
     "find-bar/find-placeholder": "Cerca (Ctrl+F)",
     "find-bar/list-global": "LISTA {name}",
     "find-bar/list-local": "lista {name}",

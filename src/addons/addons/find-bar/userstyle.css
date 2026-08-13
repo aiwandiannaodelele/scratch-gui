@@ -1,123 +1,198 @@
 @import url("../editor-theme3/compatibility.css");
 
+.sa-find-trigger {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.375rem;
+  width: calc(100% - 0.75rem);
+  height: 3.5rem;
+  margin: 0.125rem 0.375rem;
+  border: none;
+  border-radius: 0.375rem;
+  background: transparent;
+  color: var(--text-primary-transparent, #71717a);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-size: 0.625rem;
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.1s ease-out, color 0.1s ease-out;
+}
+
+.sa-find-trigger:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+  color: var(--text-primary, #18181b);
+}
+
+.sa-find-trigger svg {
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+
+.sa-find-trigger:hover svg {
+  opacity: 1;
+}
+
+.sa-find-trigger-label {
+  white-space: nowrap;
+}
+
+.sa-find-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 40000;
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.45);
+  padding-top: 15vh;
+}
+
+.sa-find-overlay.visible {
+  display: flex;
+  animation: sa-find-fade-in 0.15s ease-out;
+}
+
+.sa-find-overlay.visible .sa-find-bar {
+  animation: sa-find-pop-in 0.15s ease-out;
+  transform-origin: top center;
+}
+
+@keyframes sa-find-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes sa-find-pop-in {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
 .sa-find-bar {
   display: flex;
-  align-items: center;
-  white-space: nowrap;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  width: 100%;
-  height: 100%;
-  margin-left: 1em;
+  flex-direction: column;
+  width: 28rem;
+  max-width: calc(100vw - 2rem);
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 24px 64px rgba(0, 0, 0, 0.2);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+  overflow: hidden;
 }
+
 .sa-find-bar[hidden] {
-  /* !important to override displayNoneWhileDisabled */
   display: none !important;
 }
 
 .sa-find-wrapper {
-  overflow: visible;
-  position: relative;
-  height: 2rem;
+  display: flex;
+  flex-direction: column;
   width: 100%;
-  max-width: 16em;
 }
 
 .sa-find-dropdown-out {
-  display: block;
-  top: -6px;
-  z-index: 100;
   width: 100%;
-  max-width: 16em;
-  position: relative;
-  padding: 4px;
-  border: none;
-  border-radius: 4px;
-  margin-top: 6px;
+  display: flex;
+  flex-direction: column;
 }
 
-.sa-find-dropdown-out.visible {
-  position: absolute;
-  width: 16em;
-  box-shadow: 0px 0px 8px 1px rgba(0, 0, 0, 0.3);
-  background-color: var(--ui-modal-background);
-  outline: 1px solid var(--ui-black-transparent);
+.sa-find-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.875rem 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  color: #71717a;
 }
 
-/* We need to modify Scratch styles so that the place where the find bar is injected */
-/* has actually correct size information, which is used to make the find bar not cover up controls */
-[class*="gui_tab-list_"] {
-  width: 100%;
-}
-[class*="gui_tab_"] {
-  flex-grow: 0;
+.sa-find-input-row svg {
+  flex-shrink: 0;
 }
 
 .sa-find-input {
-  width: 100%;
-  box-sizing: border-box !important;
-  /* !important required for extension, because CSS injection method (and hence order) differs from addon */
-  height: 1.5rem;
-
-  /* Change Scratch default styles */
-  border-radius: 0.25rem;
-  font-size: 0.75rem;
-  padding-left: 0.4em;
+  flex: 1;
+  border: none;
+  background: transparent;
+  font-size: 0.875rem;
+  color: #18181b;
+  outline: none;
+  font-family: inherit;
 }
 
-.sa-find-input:focus {
-  /* Change Scratch default styles */
-  box-shadow: none;
+.sa-find-input::placeholder {
+  color: #a1a1aa;
+}
+
+.sa-find-shortcut {
+  padding: 0.125rem 0.375rem;
+  font-size: 0.6875rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  color: #a1a1aa;
+  background: #f4f4f5;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 0.25rem;
+  flex-shrink: 0;
 }
 
 .sa-find-dropdown {
-  display: none;
-  position: relative;
-  padding: 0.2em 0;
-  font-size: 0.75rem;
-  line-height: 1;
-  overflow-y: auto;
-  min-height: 128px;
-  max-height: 65vh;
-  user-select: none;
-  max-width: 100%;
-  margin-top: 6px;
-  border: none;
-}
-
-.sa-find-dropdown-out.visible > .sa-find-dropdown {
   display: block;
+  list-style: none;
+  margin: 0;
+  padding: 0.25rem;
+  max-height: 18rem;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  user-select: none;
 }
 
 .sa-find-dropdown > li {
-  display: block;
-  padding: 0.5em 0.3em;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.625rem;
   margin: 0;
-  font-weight: bold;
+  border-radius: 0.375rem;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-}
-
-.sa-find-dropdown > li > b {
-  background-color: #aaffaa;
-  color: black;
-}
-
-/* Drop down items */
-.sa-find-dropdown > li:hover,
-.sa-find-dropdown > li.sel {
-  color: var(--sa-block-text-on-bright-background);
   cursor: pointer;
+  color: #18181b;
+  transition: background-color 0.1s ease-out;
 }
 
 .sa-find-dropdown > li::before {
-  content: "\25CF "; /* ● */
+  content: "\25CF";
+  font-size: 0.5rem;
+  color: #a1a1aa;
+  flex-shrink: 0;
+}
+
+.sa-find-dropdown > li > b {
+  background-color: #fef08a;
+  color: #18181b;
+  border-radius: 0.125rem;
+  padding: 0 0.125rem;
+}
+
+.sa-find-dropdown > li:hover,
+.sa-find-dropdown > li.sel {
+  background-color: #f4f4f5;
+  color: var(--sa-block-text-on-bright-background);
+}
+
+.sa-find-dropdown > li:focus-visible {
+  outline: 2px solid var(--looks-secondary);
+  outline-offset: -2px;
 }
 
 .sa-find-flag {
   color: #4cbf56;
 }
-/* .sa-find-dropdown added for specificity */
 .sa-find-dropdown > .sa-find-flag:hover,
 .sa-find-dropdown > .sa-find-flag.sel {
   background-color: #4cbf56;
@@ -132,20 +207,30 @@
   background-color: var(--sa-block-bright-background);
 }
 
+.sa-find-empty {
+  padding: 1.5rem;
+  text-align: center;
+  font-size: 0.875rem;
+  color: #a1a1aa;
+}
+
 .sa-find-carousel {
   font-weight: normal;
-  position: absolute;
-  right: 0;
-  white-space: nowrap;
-  background-color: inherit;
-  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  margin-inline-start: auto;
+  color: #a1a1aa;
+  font-size: 0.6875rem;
   padding: 0;
 }
 
 .sa-find-carousel-control {
-  padding: 0 6px;
+  padding: 0 0.25rem;
+  color: #71717a;
+  cursor: pointer;
 }
 
 .sa-find-carousel-control:hover {
-  color: #ffff80;
+  color: #18181b;
 }

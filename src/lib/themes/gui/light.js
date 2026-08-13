@@ -1,25 +1,25 @@
 const guiColors = {
     'color-scheme': 'light',
 
-    'ui-primary': 'hsla(215, 100%, 95%, 1)', /* #E5F0FF */
-    'ui-secondary': 'hsla(215, 75%, 95%, 1)', /* #E9F1FC */
-    'ui-tertiary': 'hsla(215, 50%, 90%, 1)', /* #D9E3F2 */
+    'ui-primary': 'hsla(240, 20%, 99%, 1)', /* #FCFCFD 主背景 */
+    'ui-secondary': 'hsla(240, 10%, 96%, 1)', /* #F4F4F5 面板背景 */
+    'ui-tertiary': 'hsla(240, 10%, 91%, 1)', /* #E8E8EA 更深面板 */
 
-    'ui-modal-overlay': 'var(--motion-primary-transparent)',
+    'ui-modal-overlay': 'hsla(240, 10%, 4%, 0.5)', /* 遮罩 */
     'ui-modal-background': 'hsla(0, 100%, 100%, 1)', /* #FFFFFF */
-    'ui-modal-foreground': 'hsla(225, 15%, 40%, 1)', /* #575E75 */
-    'ui-modal-header-background': 'var(--looks-secondary)',
-    'ui-modal-header-foreground': 'hsla(0, 100%, 100%, 1)', /* #FFFFFF */
+    'ui-modal-foreground': 'hsla(240, 10%, 8%, 1)', /* #1A1A1D */
+    'ui-modal-header-background': 'hsla(240, 10%, 96%, 1)', /* #F4F4F5 */
+    'ui-modal-header-foreground': 'hsla(240, 10%, 8%, 1)', /* #1A1A1D */
 
     'ui-white': 'hsla(0, 100%, 100%, 1)', /* #FFFFFF */
     'ui-white-dim': 'hsla(0, 100%, 100%, 0.75)', /* 25% transparent version of ui-white */
     'ui-white-transparent': 'hsla(0, 100%, 100%, 0.25)', /* 25% transparent version of ui-white */
     'ui-transparent': 'hsla(0, 100%, 100%, 0)', /* 25% transparent version of ui-white */
 
-    'ui-black-transparent': 'hsla(0, 0%, 0%, 0.15)', /* 15% transparent version of black */
+    'ui-black-transparent': 'hsla(240, 8%, 12%, 0.10)', /* 细边框 */
 
-    'text-primary': 'hsla(225, 15%, 40%, 1)', /* #575E75 */
-    'text-primary-transparent': 'hsla(225, 15%, 40%, 0.75)',
+    'text-primary': 'hsla(240, 10%, 10%, 1)', /* #1B1B1F */
+    'text-primary-transparent': 'hsla(240, 10%, 10%, 0.75)',
 
     'motion-primary': 'hsla(215, 100%, 65%, 1)', /* #4C97FF */
     'motion-primary-transparent': 'hsla(215, 100%, 65%, 0.9)', /* 90% transparent version of motion-primary */
@@ -65,21 +65,21 @@ const guiColors = {
 
     'popover-background': '#ffffff',
 
-    'shadow': 'hsla(0, 0%, 0%, 0.15)',
+    'shadow': 'hsla(240, 10%, 4%, 0.10)',
 
-    'badge-background': '#dbebff',
-    'badge-border': '#b9d6ff',
+    'badge-background': 'hsla(240, 10%, 93%, 1)',
+    'badge-border': 'hsla(240, 10%, 85%, 1)',
 
     'fullscreen-background': '#ffffff',
-    'fullscreen-accent': '#e8edf1',
+    'fullscreen-accent': '#f4f4f5',
 
     'page-background': '#ffffff',
-    'page-foreground': '#000000',
+    'page-foreground': '#18181b',
 
-    'project-title-inactive': 'var(--ui-white-transparent)',
-    'project-title-hover': '#ffffff7f',
+    'project-title-inactive': 'hsla(0, 100%, 100%, 0.5)',
+    'project-title-hover': 'rgba(255, 255, 255, 0.9)',
 
-    'link-color': '#2255dd',
+    'link-color': '#2563eb',
 
     'filter-icon-black': 'none',
     'filter-icon-gray': 'grayscale(100%)',

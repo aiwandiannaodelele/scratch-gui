@@ -19,6 +19,7 @@
     "find-bar/complex-broadcast": "（表达式）",
     "find-bar/event": "事件 {name}",
     "find-bar/find-placeholder": "查找（Ctrl+F）",
+    "find-bar/find-title": "查找",
     "find-bar/list-global": "列表 {name}",
     "find-bar/list-local": "列表 {name}",
     "find-bar/var-global": "变量 {name}",

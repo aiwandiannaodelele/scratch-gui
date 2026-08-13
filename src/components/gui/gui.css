@@ -57,145 +57,148 @@
 }
 
 .tab-list {
-    height: $stage-menu-height;
-    width: 250px; /* Match width of the toolbox */
+    grid-column: 1;
+    width: 3.5rem;
     display: flex;
-    align-items: flex-end;
-    flex-shrink: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.5rem 0;
 
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
     font-weight: 500;
-    font-size: 0.80rem;
+    font-size: 0.8rem;
 
-    /* Overrides for react-tabs styling */
-    margin: 0 !important;
-    border-bottom: 0 !important;
+    border-right: 1px solid $ui-black-transparent;
+    background-color: $ui-secondary;
 
     color: $text-primary;
 }
 
 .tab {
-    flex-grow: 1;
-    height: 80%;
-    margin-bottom: 0;
+    height: 3.5rem;
+    margin: 0.125rem 0.375rem;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.125rem;
+    font-size: 0.625rem;
+    line-height: 1;
 
-    border-radius: 1rem 1rem 0 0;
-    border: 1px solid $ui-black-transparent;
-
-    padding: 0.125rem 1.25rem 0;
-    font-size: 0.75rem;
-
-    background-color: $ui-tertiary;
+    background-color: transparent;
     color: $text-primary-transparent;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 0.375rem;
 
     user-select: none;
     white-space: nowrap;
-}
-
-[dir="ltr"] .tab {
-    margin-left: -0.5rem;
-}
-
-[dir="rtl"] .tab {
-    margin-right: -0.5rem;
-}
-
-[dir="ltr"] .tab:nth-of-type(1) {
-    margin-left: 0;
-}
-
-[dir="rtl"] .tab:nth-of-type(1) {
-    margin-right: 0;
-}
-
-/* Use z-indices to force left-on-top for tabs */
-.tab:nth-of-type(1) {
-    z-index: 3;
-}
-.tab:nth-of-type(2) {
-    z-index: 2;
-}
-.tab:nth-of-type(3) {
-    z-index: 1;
+    cursor: pointer;
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
 }
 
 .tab:hover {
-  background-color: $ui-primary;
+  background-color: $ui-tertiary;
+  color: $text-primary;
 }
 
 .tab.is-selected {
-    height: 90%;
     color: $looks-secondary;
     background-color: $ui-white;
-    z-index: 4; /* Make sure selected is always above */
+    box-shadow: inset 0 0 0 1px $ui-black-transparent;
 }
 
 .tab img {
-    width: 1.375rem;
+    width: 1.5rem;
+    height: 1.5rem;
     filter: grayscale(100%);
-}
-
-[dir="ltr"] .tab img {
-    margin-right: 0.125rem;
-}
-
-[dir="rtl"] .tab img {
-    margin-left: 0.125rem;
-}
-
-/* mirror blocks and sound tab icons */
-[dir="rtl"] .tab:nth-of-type(1) img {
-    transform: scaleX(-1);
-}
-
-[dir="rtl"] .tab:nth-of-type(3) img {
-    transform: scaleX(-1);
+    opacity: 0.7;
 }
 
 .tab.is-selected img {
     filter: none;
+    opacity: 1;
 }
 
-/* Tab style overrides from react-tabs */
-.tab.is-selected:after {
-    display: none;
+.sidebar-button {
+    height: 3.5rem;
+    margin: 0.125rem 0.375rem;
+    border: none;
+    border-radius: 0.375rem;
+    padding: 0.375rem 0.125rem;
+    font-size: 0.625rem;
+    line-height: 1;
+
+    background-color: transparent;
+    color: $text-primary-transparent;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.375rem;
+
+    user-select: none;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background-color 0.1s ease-out, color 0.1s ease-out;
+    font-family: inherit;
 }
 
-.tab.is-selected:focus {
-    outline: none;
-    box-shadow: none;
-    border-color: $ui-black-transparent;
+.sidebar-button:hover {
+  background-color: $ui-tertiary;
+  color: $text-primary;
 }
 
+.sidebar-button img {
+    width: 1.5rem;
+    height: 1.5rem;
+    filter: grayscale(100%);
+    opacity: 0.7;
+}
+
+/* Remove react-tabs default underline/outline artifacts */
+.tab.is-selected:after,
+.tab:focus:after,
 .tab.is-selected:focus:after {
     display: none;
 }
 
-/* Body of the tabs */
+.tab:focus,
+.tab.is-selected:focus {
+    outline: none;
+    box-shadow: inset 0 0 0 1px $ui-black-transparent;
+}
+
+/* Body of the tabs: grid layout, activity bar on left */
 .tabs {
     position: relative;
     flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 3.5rem 1fr;
+    grid-template-rows: 100%;
+    min-width: 0;
 }
 
 .tab-panel {
     position: relative;
-    flex-grow: 1;
+    grid-column: 2;
+    grid-row: 1;
     display: none;
+    min-width: 0;
+    flex-direction: column;
 }
 
 .tab-panel.is-selected {
     display: flex;
+    flex-direction: column;
 }
 
 .blocks-wrapper {
     flex-grow: 1;
     position: relative;
+    min-height: 0;
 }
 
 .stage-and-target-wrapper {

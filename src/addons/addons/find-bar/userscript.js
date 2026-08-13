@@ -24,29 +24,104 @@ export default async function ({ addon, msg, console }) {
       return Blockly.getMainWorkspace();
     }
 
+    triggerLabel() {
+      const labels = {
+        de: "Finden", en: "Find", es: "Buscar", fi: "Etsi",
+        fr: "Rechercher", hu: "Keresés", it: "Cerca", ja: "検索",
+        ko: "찾기", nl: "Zoeken", pl: "Szukaj", pt: "Localizar",
+        ru: "Поиск", sl: "Iskanje", tr: "Ara", "zh-cn": "查找", "zh-tw": "查找"
+      };
+      let locale = addon.tab.redux.state.locales.locale;
+      const key = Object.prototype.hasOwnProperty.call(labels, locale) ? locale : locale.split("-")[0];
+      return labels[key] || "Find";
+    }
+
+    createTrigger() {
+      const tabList = document.querySelector("ul[class*=gui_tab-list_]");
+      if (!tabList || tabList.querySelector(".sa-find-trigger")) {
+        return;
+      }
+      this.trigger = document.createElement("button");
+      this.trigger.type = "button";
+      this.trigger.className = "sa-find-trigger";
+
+      const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      svg.setAttribute("viewBox", "0 0 24 24");
+      svg.setAttribute("width", "20");
+      svg.setAttribute("height", "20");
+      svg.setAttribute("fill", "none");
+      svg.setAttribute("stroke", "currentColor");
+      svg.setAttribute("stroke-width", "2");
+      svg.setAttribute("stroke-linecap", "round");
+      svg.setAttribute("stroke-linejoin", "round");
+      svg.innerHTML = '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>';
+      this.trigger.appendChild(svg);
+
+      const label = document.createElement("span");
+      label.className = "sa-find-trigger-label";
+      label.textContent = this.triggerLabel();
+      this.trigger.appendChild(label);
+
+      this.trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        this.open();
+      });
+
+      addon.tab.displayNoneWhileDisabled(this.trigger);
+      tabList.appendChild(this.trigger);
+    }
+
     createDom(root) {
+      this.overlay = document.createElement("div");
+      this.overlay.className = "sa-find-overlay";
+      addon.tab.displayNoneWhileDisabled(this.overlay);
+
       this.findBarOuter = document.createElement("div");
       this.findBarOuter.className = "sa-find-bar";
-      addon.tab.displayNoneWhileDisabled(this.findBarOuter, { display: "flex" });
-      root.appendChild(this.findBarOuter);
+      this.findBarOuter.setAttribute("role", "dialog");
+      this.findBarOuter.setAttribute("aria-modal", "true");
 
-      this.findWrapper = this.findBarOuter.appendChild(document.createElement("span"));
+      this.findWrapper = document.createElement("div");
       this.findWrapper.className = "sa-find-wrapper";
 
-      this.dropdownOut = this.findWrapper.appendChild(document.createElement("label"));
+      this.dropdownOut = this.findWrapper.appendChild(document.createElement("div"));
       this.dropdownOut.className = "sa-find-dropdown-out";
 
-      this.findInput = this.dropdownOut.appendChild(document.createElement("input"));
-      this.findInput.className = addon.tab.scratchClass("input_input-form", {
-        others: "sa-find-input",
-      });
-      // for <label>
-      this.findInput.id = "sa-find-input";
-      this.findInput.type = "search";
+      const inputRow = this.dropdownOut.appendChild(document.createElement("div"));
+      inputRow.className = "sa-find-input-row";
+      const icon = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+      icon.setAttribute("viewBox", "0 0 24 24");
+      icon.setAttribute("width", "16");
+      icon.setAttribute("height", "16");
+      icon.setAttribute("fill", "none");
+      icon.setAttribute("stroke", "currentColor");
+      icon.setAttribute("stroke-width", "2");
+      icon.setAttribute("stroke-linecap", "round");
+      icon.setAttribute("stroke-linejoin", "round");
+      icon.innerHTML = '<circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>';
+      inputRow.appendChild(icon);
+
+      this.findInput = inputRow.appendChild(document.createElement("input"));
+      this.findInput.className = "sa-find-input";
+      this.findInput.type = "text";
       this.findInput.placeholder = msg("find-placeholder");
       this.findInput.autocomplete = "off";
+      this.findInput.spellcheck = false;
+
+      const shortcut = inputRow.appendChild(document.createElement("kbd"));
+      shortcut.className = "sa-find-shortcut";
+      shortcut.textContent = "ESC";
 
       this.dropdownOut.appendChild(this.dropdown.createDom());
+      this.dropdown.el.addEventListener("click", (e) => {
+        if (e.target.closest(".sa-find-dropdown > li")) {
+          this.hideDropDown();
+        }
+      });
+
+      this.findBarOuter.appendChild(this.findWrapper);
+      this.overlay.appendChild(this.findBarOuter);
+      document.body.appendChild(this.overlay);
 
       this.bindEvents();
       this.tabChanged();
@@ -56,7 +131,42 @@ export default async function ({ addon, msg, console }) {
       this.findInput.addEventListener("focus", () => this.inputChange());
       this.findInput.addEventListener("keydown", (e) => this.inputKeyDown(e));
       this.findInput.addEventListener("keyup", () => this.inputChange());
-      this.findInput.addEventListener("focusout", () => this.hideDropDown());
+      this.overlay.addEventListener("mousedown", (e) => {
+        if (e.target === this.overlay) {
+          this.hideDropDown();
+        }
+      });
+      this.overlay.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+          this.hideDropDown();
+        }
+      });
+      addon.tab.redux.initialize();
+      addon.tab.redux.addEventListener("statechanged", (e) => {
+        if (e.detail.action.type === "scratch-gui/navigation/ACTIVATE_TAB") {
+          this.tabChanged();
+        }
+        if (e.detail.action.type === "scratch-gui/locales/SELECT_LOCALE") {
+          this.updateTriggerLabel();
+        }
+      });
+    }
+
+    updateTriggerLabel() {
+      if (this.trigger) {
+        const label = this.trigger.querySelector(".sa-find-trigger-label");
+        if (label) {
+          label.textContent = this.triggerLabel();
+        }
+      }
+    }
+
+    open() {
+      this.findInput.value = "";
+      this.prevValue = null;
+      this.dropdown.empty();
+      this.showDropDown();
+      this.findInput.focus();
     }
 
     tabChanged() {
@@ -66,6 +176,9 @@ export default async function ({ addon, msg, console }) {
       const tab = addon.tab.redux.state.scratchGui.editorTab.activeTabIndex;
       const visible = tab === 0 || tab === 1 || tab === 2;
       this.findBarOuter.hidden = !visible;
+      if (!visible) {
+        this.hideDropDown();
+      }
     }
 
     inputChange() {
@@ -91,6 +204,11 @@ export default async function ({ addon, msg, console }) {
           while (li.firstChild) {
             li.removeChild(li.firstChild);
           }
+          if (val.length === 0) {
+            // No filter text - restore plain text (no highlight markup)
+            li.appendChild(document.createTextNode(procCode));
+            continue;
+          }
           if (i > 0) {
             li.appendChild(document.createTextNode(procCode.substring(0, i)));
           }
@@ -111,7 +229,10 @@ export default async function ({ addon, msg, console }) {
 
       // Enter
       if (e.key === "Enter") {
-        this.findInput.blur();
+        e.preventDefault();
+        if (this.dropdown.selected) {
+          this.dropdown.selected.click();
+        }
         return;
       }
 
@@ -121,9 +242,10 @@ export default async function ({ addon, msg, console }) {
           this.findInput.value = ""; // Clear search first, then close on second press
           this.inputChange();
         } else {
-          this.findInput.blur();
+          this.hideDropDown();
         }
         e.preventDefault();
+        e.stopPropagation();
         return;
       }
     }
@@ -135,10 +257,9 @@ export default async function ({ addon, msg, console }) {
 
       if (e.key.toLowerCase() === "f" && ctrlKey && !e.shiftKey) {
         // Ctrl + F (Override default Ctrl+F find)
-        this.findInput.focus();
-        this.findInput.select();
         e.cancelBubble = true;
         e.preventDefault();
+        this.open();
         return true;
       }
 
@@ -172,14 +293,16 @@ export default async function ({ addon, msg, console }) {
     }
 
     showDropDown(focusID, instanceBlock) {
-      if (!focusID && this.dropdownOut.classList.contains("visible")) {
+      if (!focusID && this.overlay.classList.contains("visible")) {
         return;
       }
 
       // special '' vs null... - null forces a reevaluation
       this.prevValue = focusID ? "" : null; // Clear the previous value of the input search
 
-      this.dropdownOut.classList.add("visible");
+      this.overlay.classList.add("visible");
+      document.body.classList.add("sa-find-open");
+      this.findInput.focus();
       let scratchBlocks =
         this.selectedTab === 0
           ? this.getScratchBlocks()
@@ -208,7 +331,8 @@ export default async function ({ addon, msg, console }) {
     }
 
     hideDropDown() {
-      this.dropdownOut.classList.remove("visible");
+      this.overlay.classList.remove("visible");
+      document.body.classList.remove("sa-find-open");
     }
 
     get selectedTab() {
@@ -830,12 +954,17 @@ export default async function ({ addon, msg, console }) {
     }
   });
 
+  await addon.tab.waitForElement("div[class*=gui_editor-wrapper]", {
+    reduxEvents: ["scratch-gui/mode/SET_PLAYER", "fontsLoaded/SET_FONTS_LOADED", "scratch-gui/locales/SELECT_LOCALE"],
+    reduxCondition: (state) => !state.scratchGui.mode.isPlayerOnly,
+  });
+  findBar.createDom();
   while (true) {
-    const root = await addon.tab.waitForElement("ul[class*=gui_tab-list_]", {
+    await addon.tab.waitForElement("ul[class*=gui_tab-list_]", {
       markAsSeen: true,
       reduxEvents: ["scratch-gui/mode/SET_PLAYER", "fontsLoaded/SET_FONTS_LOADED", "scratch-gui/locales/SELECT_LOCALE"],
       reduxCondition: (state) => !state.scratchGui.mode.isPlayerOnly,
     });
-    findBar.createDom(root);
+    findBar.createTrigger();
   }
 }

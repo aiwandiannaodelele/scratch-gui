@@ -15,6 +15,7 @@
     "editor-devtools/variables": "variáveis",
     "find-bar/complex-broadcast": "(expressão)",
     "find-bar/event": "evento {name}",
+    "find-bar/find-title": "Localizar",
     "find-bar/find-placeholder": "Localizar (Ctrl+F)",
     "find-bar/list-global": "LISTA {name}",
     "find-bar/list-local": "lista {name}",

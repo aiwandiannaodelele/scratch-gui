@@ -18,6 +18,7 @@
     "editor-devtools/variables": "değişkenler",
     "find-bar/complex-broadcast": "(ifade)",
     "find-bar/event": "{name} haberi",
+    "find-bar/find-title": "Ara",
     "find-bar/find-placeholder": "Ara (Ctrl+F)",
     "find-bar/list-global": "{name} LİSTESİ",
     "find-bar/list-local": "{name} listesi",

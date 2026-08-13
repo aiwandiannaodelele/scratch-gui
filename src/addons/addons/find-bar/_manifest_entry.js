@@ -2,7 +2,7 @@
 const manifest = {
   "editorOnly": true,
   "name": "Editor find bar",
-  "description": "Adds a find bar to find and jump to scripts, costumes and sounds next to the sounds tab. Use Ctrl+Left and Ctrl+Right in the code area to navigate to previous or next visited position after using the find bar.",
+  "description": "Adds a spotlight-style search panel (Ctrl+F) to find and jump to scripts, costumes and sounds. Use Ctrl+Left and Ctrl+Right in the code area to navigate to previous or next visited position after using the find bar.",
   "info": [
     {
       "text": "This addon was previously part of the \"developer tools\" addon but has moved here.",
