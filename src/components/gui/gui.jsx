@@ -52,7 +52,7 @@ import soundsIcon from '!../../lib/tw-recolor/build!./icon--sounds.svg';
 
 const messages = defineMessages({
     addExtension: {
-        id: 'gui.gui.addExtension',
+        id: 'tw.gui.addExtension',
         description: 'Button to add an extension in the target pane',
         defaultMessage: '扩展'
     }
