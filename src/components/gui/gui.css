@@ -63,6 +63,7 @@
     flex-direction: column;
     align-items: stretch;
     padding: 0.5rem 0;
+    z-index: 10;
 
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
     font-weight: 500;
