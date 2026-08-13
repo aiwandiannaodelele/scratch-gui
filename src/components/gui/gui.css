@@ -131,7 +131,7 @@
     line-height: 1;
 
     background-color: transparent;
-    color: $text-primary;
+    color: $text-primary-transparent;
 
     display: flex;
     flex-direction: column;
@@ -144,18 +144,19 @@
     cursor: pointer;
     transition: background-color 0.1s ease-out, color 0.1s ease-out;
     font-family: inherit;
+    outline: none;
 }
 
 .sidebar-button:hover {
   background-color: $ui-tertiary;
-  color: $looks-secondary;
+  color: $text-primary;
 }
 
 .sidebar-button img {
     width: 1.5rem;
     height: 1.5rem;
     filter: grayscale(100%);
-    opacity: 0.85;
+    opacity: 0.7;
 }
 
 .sidebar-button:hover img {
