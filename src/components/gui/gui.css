@@ -53,11 +53,14 @@
     position: relative;
 
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
 }
 
 .tab-list {
-    grid-column: 1;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
     width: 3.5rem;
     display: flex;
     flex-direction: column;
@@ -182,16 +185,15 @@
 .tabs {
     position: relative;
     flex-grow: 1;
-    display: grid;
-    grid-template-columns: 3.5rem 1fr;
-    grid-template-rows: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 3.5rem;
     min-width: 0;
 }
 
 .tab-panel {
     position: relative;
-    grid-column: 2;
-    grid-row: 1;
+    flex-grow: 1;
     display: none;
     min-width: 0;
     flex-direction: column;
