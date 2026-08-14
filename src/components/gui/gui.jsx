@@ -391,7 +391,7 @@ const GUIComponent = props => {
                                     >
                                         <img
                                             draggable={false}
-                                            src={addExtensionIcon}
+                                            src={addExtensionIcon()}
                                         />
                                         <span>{intl.formatMessage(messages.addExtension)}</span>
                                     </button>
