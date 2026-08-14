@@ -384,17 +384,19 @@ const GUIComponent = props => {
                                             id="gui.gui.soundsTab"
                                         />
                                     </Tab>
-                                    <button
-                                        className={styles.sidebarButton}
-                                        title={intl.formatMessage(messages.addExtension)}
-                                        onClick={onExtensionButtonClick}
-                                    >
-                                        <img
-                                            draggable={false}
-                                            src={addExtensionIcon()}
-                                        />
-                                        <span>{intl.formatMessage(messages.addExtension)}</span>
-                                    </button>
+                                    <div className={styles.sidebarBottom}>
+                                        <button
+                                            className={styles.sidebarButton}
+                                            title={intl.formatMessage(messages.addExtension)}
+                                            onClick={onExtensionButtonClick}
+                                        >
+                                            <img
+                                                draggable={false}
+                                                src={addExtensionIcon()}
+                                            />
+                                            <span>{intl.formatMessage(messages.addExtension)}</span>
+                                        </button>
+                                    </div>
                                 </TabList>
                                 <TabPanel className={tabClassNames.tabPanel}>
                                     <Box className={styles.blocksWrapper}>

@@ -168,6 +168,12 @@
     opacity: 1;
 }
 
+.sidebar-bottom {
+    margin-top: auto;
+    padding-top: 0.25rem;
+    border-top: 1px solid $ui-black-transparent;
+}
+
 /* Remove react-tabs default underline/outline artifacts */
 .tab.is-selected:after,
 .tab:focus:after,
