@@ -4,8 +4,8 @@
 .backpack-container {
     flex-shrink: 1;
     position: relative;
-    margin-left: -3.5rem;
-    width: calc(100% + 3.5rem);
+    margin-left: 3.5rem;
+    width: calc(100% - 3.5rem);
 }
 
 .backpack-header {
